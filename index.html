@@ -1,0 +1,799 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday 🎂</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0f0f1a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ---------- BACKGROUND ---------- */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #ff4f9a;
+            filter: blur(180px);
+            opacity: 0.18;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #7c4dff;
+            filter: blur(180px);
+            opacity: 0.15;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .small-text {
+            font-size: 18px;
+            color: #ff9bc8;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            animation: fadeDown 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 10vw, 100px);
+            line-height: 1;
+            background: linear-gradient(90deg, #ff6fae, #ffd1e6, #a98cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeUp 1.2s ease;
+        }
+
+        .hero h2 {
+            margin-top: 25px;
+            font-size: clamp(24px, 5vw, 42px);
+            color: white;
+            animation: fadeUp 1.5s ease;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            color: #c7c7d4;
+            font-size: 17px;
+            animation: fadeUp 1.8s ease;
+        }
+
+        .start-btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 30px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff4f9a, #8c5cff);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            animation: fadeUp 2s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(255, 79, 154, 0.3);
+        }
+
+        /* ---------- SECTIONS ---------- */
+
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #aaaabb;
+        }
+
+        /* ---------- MESSAGE ---------- */
+
+        .message-card {
+            max-width: 800px;
+            margin: auto;
+            padding: 45px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .message-card .heart {
+            font-size: 50px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .message-card p {
+            margin-top: 25px;
+            line-height: 1.9;
+            color: #d7d7df;
+            font-size: 17px;
+        }
+
+        /* ---------- MEMORIES ---------- */
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .photo-card {
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #202031;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .photo-card:nth-child(2) img,
+        .photo-card:nth-child(3) img {
+            object-position: center top;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-card span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            font-weight: 600;
+        }
+
+        /* ---------- REASONS ---------- */
+
+        .reasons {
+            max-width: 900px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .reason {
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s;
+        }
+
+        .reason:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,100,170,0.5);
+        }
+
+        .reason span {
+            font-size: 28px;
+        }
+
+        .reason h3 {
+            margin: 10px 0;
+        }
+
+        .reason p {
+            color: #aaaabb;
+            line-height: 1.6;
+        }
+
+        /* ---------- SURPRISE ---------- */
+
+        .surprise {
+            text-align: center;
+        }
+
+        .gift {
+            font-size: 100px;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.4s;
+        }
+
+        .gift:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .surprise-message {
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            display: none;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .surprise-message.show {
+            display: block;
+        }
+
+        .surprise-message h3 {
+            color: #ff83b7;
+            font-size: 28px;
+        }
+
+        .surprise-message p {
+            margin-top: 15px;
+            line-height: 1.8;
+            color: #d4d4df;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888899;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        footer span {
+            color: #ff6fae;
+        }
+
+        /* ---------- FLOATING HEARTS ---------- */
+
+        .heart-float {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* ---------- CONFETTI ---------- */
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            top: -10px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        /* ---------- ANIMATIONS ---------- */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 768px) {
+
+            section {
+                padding: 80px 6%;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .reasons {
+                grid-template-columns: 1fr;
+            }
+
+            .message-card {
+                padding: 30px 20px;
+            }
+
+            .photo-card {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-text">
+                ✨ A special day for someone special ✨
+            </div>
+
+            <h1>Happy Birthday!</h1>
+
+            <h2>🎂 AJAY 🎂</h2>
+
+            <p>
+                Today isn't just another day...
+                it's the day the world got a little brighter. 💖
+            </p>
+
+            <a href="#message" class="start-btn">
+                Start the Celebration ✨
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- MESSAGE -->
+
+    <section id="message">
+
+        <div class="section-title">
+            <h2>💌 A Little Message</h2>
+            <p>Something from my heart to yours</p>
+        </div>
+
+        <div class="message-card">
+
+            <div class="heart">❤️</div>
+
+            <p>
+                Happy Birthday to one of the most amazing people
+                I've had the chance to know! 🎉
+                <br><br>
+
+                Thank you for all the laughs, random conversations,
+                crazy moments and unforgettable memories.😄
+                <br><br>
+
+                I hope this new year of your life brings you
+                happiness, success, good health and lots of beautiful
+                memories.
+                <br><br>
+
+                Never stop being the amazing person you are.
+                Keep smiling, keep dreaming and keep shining! ✨
+                <br><br>
+
+                Once again...
+                <strong>Happy Birthday! 🎂💖</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MEMORIES -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>👑 The Birthday Boy</h2>
+
+            <p>
+                Another year of being effortlessly awesome 😎
+            </p>
+
+        </div>
+
+        <div class="gallery">
+
+            <div class="photo-card">
+
+                <img
+                    src="image1.jpeg"
+                    alt="Memory"
+                >
+
+                <span>That Smile ✨</span>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                    src="image2.jpeg"
+                    alt="Friends"
+                >
+
+                <span>😎 Just Being Him</span>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                    src="image3.jpeg"
+                    alt="Friendship"
+                >
+
+                <span>Simply Him</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WHY SPECIAL -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>💖 Why You're Special</h2>
+
+            <p>
+                Just a few reasons...
+            </p>
+
+        </div>
+
+
+        <div class="reasons">
+
+            <div class="reason">
+
+                <span>🌟</span>
+
+                <h3> Always Encourages Me</h3>
+
+                <p>
+                    You make me believe that I can do better and achieve more.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>🤝</span>
+
+                <h3>You're always there</h3>
+
+                <p>
+                    Through good days and bad days,
+                    your friendship means a lot.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>✨</span>
+
+                <h3>You are unique</h3>
+
+                <p>
+                    There is nobody quite like you,
+                    and that's what makes you special.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>❤️</span>
+
+                <h3>You're unforgettable</h3>
+
+                <p>
+                    The memories we've created are
+                    ones I'll always keep.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SURPRISE -->
+
+    <section class="surprise">
+
+        <div class="section-title">
+
+            <h2>🎁 One Last Surprise</h2>
+
+            <p>
+                Don't leave without opening your gift!
+            </p>
+
+        </div>
+
+
+        <div
+            class="gift"
+            id="gift"
+            onclick="openGift()"
+        >
+            🎁
+        </div>
+
+
+        <div
+            class="surprise-message"
+            id="surpriseMessage"
+        >
+
+            <h3>🎉 Surprise! 🎉</h3>
+
+            <p>
+                I'm genuinely lucky to have a friend like you.
+                <br><br>
+
+                Here's your reminder that no matter where
+                life takes us, I hope we always have good friendship.
+                <br><br>
+
+                Keep being you.
+                Keep chasing your dreams.
+                And most importantly...
+                <br><br>
+
+                <strong>
+                    HAVE THE BEST BIRTHDAY EVER! ❤️🎂✨
+                </strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        Made with ❤️ for
+        <span>SUNNY</span>
+
+        <br><br>
+
+        © 2026 Birthday Celebration
+
+    </footer>
+
+
+    <script>
+
+        /* ---------- CONFETTI ---------- */
+
+        function createConfetti() {
+
+            for (let i = 0; i < 100; i++) {
+
+                const confetti = document.createElement("div");
+
+                confetti.classList.add("confetti");
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) + "s";
+
+                confetti.style.background =
+                    `hsl(${Math.random() * 360}, 90%, 65%)`;
+
+                confetti.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 6000);
+            }
+        }
+
+
+        /* ---------- GIFT ---------- */
+
+        function openGift() {
+
+            const message =
+                document.getElementById("surpriseMessage");
+
+            const gift =
+                document.getElementById("gift");
+
+            message.classList.toggle("show");
+
+            if (message.classList.contains("show")) {
+
+                gift.textContent = "🎉";
+
+                createConfetti();
+
+                for (let i = 0; i < 20; i++) {
+                    createHeart();
+                }
+            }
+            else {
+
+                gift.textContent = "🎁";
+            }
+        }
+
+
+        /* ---------- FLOATING HEARTS ---------- */
+
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.classList.add("heart-float");
+
+            heart.textContent =
+                Math.random() > 0.5 ? "❤️" : "💖";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (Math.random() * 3 + 3) + "s";
+
+            heart.style.fontSize =
+                (Math.random() * 20 + 15) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+
+        /* ---------- RANDOM HEARTS ---------- */
+
+        setInterval(() => {
+
+            if (Math.random() > 0.5) {
+                createHeart();
+            }
+
+        }, 1200);
+
+
+        /* ---------- BIRTHDAY CONFETTI ---------- */
+
+        window.addEventListener("load", () => {
+
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
